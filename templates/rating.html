@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}Rate Alpha Nex{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-star me-2"></i>Rate Alpha Nex
+                    </h4>
+                    <p class="mb-0 mt-2 text-light">Help us improve by sharing your experience</p>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <!-- Overall Rating -->
+                        <div class="mb-4">
+                            {{ form.rating.label(class="form-label fw-bold") }}
+                            <div class="rating-stars mb-2">
+                                {% for i in range(1, 6) %}
+                                <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" class="d-none">
+                                <label for="star{{ i }}" class="star-label me-1" data-rating="{{ i }}">
+                                    <i class="fas fa-star fa-2x text-muted"></i>
+                                </label>
+                                {% endfor %}
+                            </div>
+                            <small class="text-muted">Click the stars to rate your experience (1 = Poor, 5 = Excellent)</small>
+                            {% for error in form.rating.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Feedback Category -->
+                        <div class="mb-4">
+                            {{ form.category.label(class="form-label fw-bold") }}
+                            {{ form.category(class="form-select") }}
+                            {% for error in form.category.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Detailed Feedback -->
+                        <div class="mb-4">
+                            {{ form.description.label(class="form-label fw-bold") }}
+                            {{ form.description(class="form-control", rows="6", placeholder="Please share your detailed feedback:\n\n• What did you like about Alpha Nex?\n• Any bugs or issues you encountered?\n• Suggestions for improvement?\n• Features you'd like to see added?\n• Overall experience and recommendations?") }}
+                            <div class="form-text">Be specific about bugs, features, or improvements. Your feedback helps us make Alpha Nex better!</div>
+                            {% for error in form.description.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Contact Email (Optional) -->
+                        <div class="mb-4">
+                            {{ form.contact_email.label(class="form-label fw-bold") }}
+                            {{ form.contact_email(class="form-control", placeholder="your.email@example.com (optional)") }}
+                            <div class="form-text">Optional: Leave your email if you'd like us to follow up on your feedback</div>
+                            {% for error in form.contact_email.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                            </a>
+                            <button type="submit" class="btn btn-dark btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Information Card -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-envelope me-2"></i>Direct Contact
+                            </h6>
+                            <p class="text-muted mb-0">
+                                Have urgent issues or detailed suggestions? Contact us directly:
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <a href="mailto:nexalpha727@gmail.com" class="btn btn-outline-dark">
+                                <i class="fas fa-envelope me-2"></i>nexalpha727@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Guidelines -->
+            <div class="card border-0 bg-light mt-4">
+                <div class="card-body p-4">
+                    <h6 class="fw-bold mb-3">
+                        <i class="fas fa-lightbulb me-2"></i>Feedback Guidelines
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-success mb-2">What to Include:</h6>
+                            <ul class="small text-muted mb-3">
+                                <li>Specific bug descriptions with steps to reproduce</li>
+                                <li>Feature requests with clear use cases</li>
+                                <li>Performance issues you've noticed</li>
+                                <li>UI/UX improvements suggestions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-info mb-2">Help Us Help You:</h6>
+                            <ul class="small text-muted mb-0">
+                                <li>Include your browser and device information</li>
+                                <li>Mention which features you use most</li>
+                                <li>Share screenshots if reporting visual issues</li>
+                                <li>Rate based on overall platform experience</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.star-label {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star-label:hover,
+.star-label.active {
+    color: #ffc107 !important;
+}
+
+.star-label i {
+    transition: all 0.2s ease;
+}
+
+.star-label:hover i,
+.star-label.active i {
+    transform: scale(1.1);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star-label');
+    const ratingInput = document.querySelector('input[name="rating"]:checked');
+    
+    // Initialize with existing rating if any
+    if (ratingInput) {
+        updateStars(parseInt(ratingInput.value));
+    }
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            document.getElementById('star' + rating).checked = true;
+            updateStars(rating);
+        });
+        
+        star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            highlightStars(rating);
+        });
+    });
+    
+    document.querySelector('.rating-stars').addEventListener('mouseleave', function() {
+        const checkedStar = document.querySelector('input[name="rating"]:checked');
+        if (checkedStar) {
+            updateStars(parseInt(checkedStar.value));
+        } else {
+            resetStars();
+        }
+    });
+    
+    function updateStars(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+                star.querySelector('i').classList.remove('text-muted');
+                star.querySelector('i').classList.add('text-warning');
+            } else {
+                star.classList.remove('active');
+                star.querySelector('i').classList.add('text-muted');
+                star.querySelector('i').classList.remove('text-warning');
+            }
+        });
+    }
+    
+    function highlightStars(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.querySelector('i').classList.remove('text-muted');
+                star.querySelector('i').classList.add('text-warning');
+            } else {
+                star.querySelector('i').classList.add('text-muted');
+                star.querySelector('i').classList.remove('text-warning');
+            }
+        });
+    }
+    
+    function resetStars() {
+        stars.forEach(star => {
+            star.classList.remove('active');
+            star.querySelector('i').classList.add('text-muted');
+            star.querySelector('i').classList.remove('text-warning');
+        });
+    }
+});
+</script>
+{% endblock %}

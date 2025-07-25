@@ -1,0 +1,331 @@
+ALPHANEX - FULL FEATURE SET (LIVE VERSION)
+
+
+---
+
+👾 Alphanex - Overview
+
+Alphanex is a live platform that combines crowd-powered data review, gamification, XP-driven economics, Reddit-style community ranking, and scalable reward systems. It is no longer built for demo purposes, but for real users. UI is black and white, sleek, fast, and minimal.
+
+
+---
+
+🏠 Website Structure (User-Facing)
+
+1. Landing Page
+
+Hero Section with tagline: "Convert your effort into XP. Your XP into Cash."
+
+Explanation of how XP system works
+
+Leaderboard preview (Top 1% users shown)
+
+"Join Now" and "Explore" buttons
+
+Testimonials from early users (rotating)
+
+"Earn XP. Earn Respect. Earn Money." block
+
+FAQs + Contact
+
+
+2. Auth System
+
+Signup / Login page (email, Google, Discord options)
+
+Reset password
+
+Session management
+
+No KYC for now
+
+
+3. User Dashboard
+
+XP Counter (live)
+
+XP History Timeline
+
+Upload Button (max 500MB/day)
+
+Files reviewed / uploaded list with statuses
+
+Pending Reviews panel
+
+Active Challenges / Missions
+
+Leaderboard Position
+
+Badge Display
+
+
+4. Leaderboard Page
+
+Global Rank List by XP
+
+Weekly + Monthly + All-Time tabs
+
+User avatars, XP, review count, accuracy %
+
+Filter: All / Uploaders / Reviewers
+
+
+5. Badges & Reputation System (Reddit Style)
+
+Top 1% - Fire badge (animated)
+
+Top 5% - Gold badge
+
+Top 10% - Silver badge
+
+Top 25% - Bronze
+
+Top 50% - Blue
+
+Progress tracker showing user proximity to next badge
+
+Unique seasonal badges (e.g., Winter Warrior)
+
+
+
+---
+
+⚖ Core Systems & Gamification
+
+🔄 XP System
+
+Earn XP for:
+
+Uploading content
+
+Reviewing others' content
+
+Spotting fake/low quality files accurately
+
+Inviting users
+
+Participating in contests & challenges
+
+Engaging with XP Missions
+
+
+XP can be converted to real money:
+
+"Earn more XP = Earn more cash"
+
+
+
+🏆 Weekly Contests
+
+Upload Phase (first 10 days): unrestricted upload
+
+Review Phase (next 20 days): intense multi-layered review
+
+Leaderboards determine payout:
+
+Top 1% = ₹10,000
+
+Top 5% = ₹5,000
+
+Top 99% = ₹1,000 for 100 reviews
+
+
+
+🥊 Reviewer XP Boosts
+
+If you review within 5 mins of upload
+
+If you review high-priority flagged content
+
+If you cross-review elite users
+
+
+🔝 Invite System
+
+Users get unique referral codes
+
+Earn XP if invitee earns XP
+
+Invite leaderboard available
+
+
+
+---
+
+🔍 Review Process Features
+
+✨ AI-Human Hybrid Review Engine
+
+First review by new user
+
+AI flags suspicious part
+
+Sent to top reviewers for confirmation
+
+If consensus = content removed or marked
+
+Users rewarded for accuracy, punished for false flags
+
+
+⚖ Dispute Resolution System
+
+Users can appeal rejected files
+
+3-5 elite reviewers act as jury
+
+Outcome decides XP loss/gain
+
+
+
+---
+
+📈 Gamified UX Features
+
+📏 XP Map
+
+Duolingo-style visual map
+
+Shows XP milestones, badges, journey
+
+Animated progress tracker
+
+
+🌎 Weekly Awards
+
+Smartest Review
+
+Best Detective
+
+Fastest Climber
+
+Reviewer Hero of the Week
+
+
+🪨 Live XP Analytics
+
+XP Today / This Week / All-Time
+
+Graphs of rank trends
+
+Accuracy percentage trend
+
+
+💸 XP Marketplace
+
+Users spend XP to:
+
+Boost uploads
+
+Buy premium themes / profile covers
+
+Unlock upload speed
+
+
+
+🕺 XP Mining Pools
+
+Team-based XP mining
+
+Teams earn large bonuses by hitting milestones
+
+Encourages squads & guilds
+
+
+
+---
+
+🤖 AI Features
+
+Fake Detection Suggestions
+
+NSFW Detector
+
+Caption Validator
+
+Auto-Summarizer
+
+Language Detector
+
+File Score Predictor (beta)
+
+
+
+---
+
+👥 Community Tools
+
+🏢 Invite-Only Rooms
+
+Users create private review challenges
+
+Schools, orgs, or groups can run mini Alphanex
+
+
+🎓 Alphanex Hall of Fame
+
+Showcasing legendary users with stats
+
+Reviewer Oath wall
+
+"Founding 1K" NFT holders
+
+
+⚙ XP Lab
+
+Test new features
+
+Give feedback = get bonus XP
+
+
+
+---
+
+💡 Unique Launch & Viral Growth
+
+🚀 Pre-Launch Waitlist with Referral Race
+
+Early users compete to get top of list
+
+Bonus XP and badge for top referrers
+
+
+🛎 Discord + Twitter Integration
+
+Autopost badges to Discord profile
+
+Auto-brag on X: "I just ranked Top 1% on Alphanex!"
+
+
+
+---
+
+🌍 Future Add-Ons
+
+XP-to-Crypto system
+
+Governance voting system for top users
+
+AI Reviewer Copilot
+
+Reputation Score for reviewers (like Stack Overflow)
+
+Brand Partnerships for XP rewards
+
+
+
+---
+
+✨ Summary
+
+Alphanex is no longer a demo. It is a next-gen crowdsourced AI data engine powered by XP, reviews, badges, and community.
+
+XP = Power
+
+Reviews = Reputation
+
+Badges = Identity
+
+Leaderboards = Legacy
+
+
+👑 Alphanex is where quality data earns money, and humans beat AI at judgment.

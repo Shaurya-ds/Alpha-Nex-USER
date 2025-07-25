@@ -1,0 +1,4 @@
+# Alpha Nex - Uploads Directory
+# This file ensures the uploads directory is tracked by git
+# The uploads directory is needed for storing user-uploaded files
+# This directory should be writable by the web server process

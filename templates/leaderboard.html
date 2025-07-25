@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}Leaderboard - Alpha Nex{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-black mb-3">
+            <i class="fas fa-trophy text-warning me-3"></i>Alpha Nex Leaderboard
+        </h1>
+        <p class="lead text-muted">Where effort converts to XP, and XP converts to cash</p>
+    </div>
+
+    <!-- Time Period Tabs -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <ul class="nav nav-pills justify-content-center bg-light rounded p-2" id="leaderboard-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#all-time">
+                        <i class="fas fa-infinity me-2"></i>All-Time
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#monthly">
+                        <i class="fas fa-calendar-alt me-2"></i>Monthly
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#weekly">
+                        <i class="fas fa-calendar-week me-2"></i>Weekly
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Filter Options -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="btn-group w-100" role="group">
+                <button type="button" class="btn btn-outline-dark active" data-filter="all">
+                    <i class="fas fa-users me-1"></i>All Users
+                </button>
+                <button type="button" class="btn btn-outline-dark" data-filter="uploaders">
+                    <i class="fas fa-cloud-upload-alt me-1"></i>Top Uploaders
+                </button>
+                <button type="button" class="btn btn-outline-dark" data-filter="reviewers">
+                    <i class="fas fa-star me-1"></i>Top Reviewers
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <!-- All-Time Tab -->
+        <div class="tab-pane fade show active" id="all-time">
+            <div class="row">
+                <!-- Top 3 Podium -->
+                <div class="col-12 mb-5">
+                    <div class="row justify-content-center">
+                        {% for user in top_users[:3] %}
+                        <div class="col-md-4 text-center">
+                            <div class="card border-0 shadow-sm h-100 {% if loop.index == 1 %}border-warning{% endif %}">
+                                <div class="card-body">
+                                    <!-- Rank Badge -->
+                                    <div class="position-relative d-inline-block mb-3">
+                                        {% if loop.index == 1 %}
+                                        <div class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle">
+                                            <i class="fas fa-crown"></i> #1
+                                        </div>
+                                        {% elif loop.index == 2 %}
+                                        <div class="badge bg-light text-dark position-absolute top-0 start-50 translate-middle">
+                                            <i class="fas fa-medal"></i> #2
+                                        </div>
+                                        {% else %}
+                                        <div class="badge bg-dark text-white position-absolute top-0 start-50 translate-middle">
+                                            <i class="fas fa-award"></i> #3
+                                        </div>
+                                        {% endif %}
+                                        
+                                        <!-- Avatar -->
+                                        <div class="bg-{% if loop.index == 1 %}warning{% elif loop.index == 2 %}light{% else %}dark{% endif %} 
+                                                    text-{% if loop.index == 1 %}dark{% elif loop.index == 2 %}dark{% else %}white{% endif %} 
+                                                    rounded-circle d-flex align-items-center justify-content-center" 
+                                             style="width: 80px; height: 80px; margin-top: 15px;">
+                                            <i class="fas fa-user fa-2x"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <h5 class="fw-bold text-black">{{ user.name }}</h5>
+                                    <h3 class="fw-bold text-warning mb-2">{{ user.xp_points }} XP</h3>
+                                    
+                                    <!-- Badge Display -->
+                                    <span class="badge bg-{{ user.get_badge_color() }} text-{% if user.get_badge_color() == 'light' %}dark{% else %}white{% endif %}">
+                                        {% if user.get_badge_tier() == 'Top 1%' %}
+                                        <i class="fas fa-fire"></i>
+                                        {% elif user.get_badge_tier() == 'Top 5%' %}
+                                        <i class="fas fa-star"></i>
+                                        {% elif user.get_badge_tier() == 'Top 10%' %}
+                                        <i class="fas fa-certificate"></i>
+                                        {% elif user.get_badge_tier() == 'Top 25%' %}
+                                        <i class="fas fa-medal"></i>
+                                        {% else %}
+                                        <i class="fas fa-award"></i>
+                                        {% endif %}
+                                        {{ user.get_badge_tier() }}
+                                    </span>
+                                    
+                                    <div class="row text-center mt-3">
+                                        <div class="col-6">
+                                            <small class="text-muted d-block">Uploads</small>
+                                            <strong>{{ user.uploads|length }}</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted d-block">Reviews</small>
+                                            <strong>{{ user.reviews|length }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Full Leaderboard -->
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-black text-white">
+                            <h5 class="mb-0"><i class="fas fa-list me-2"></i>Complete Rankings</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="border-0">Rank</th>
+                                            <th class="border-0">User</th>
+                                            <th class="border-0">XP Points</th>
+                                            <th class="border-0">Badge</th>
+                                            <th class="border-0">Uploads</th>
+                                            <th class="border-0">Reviews</th>
+                                            <th class="border-0">Accuracy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in all_users %}
+                                        <tr {% if loop.index <= 3 %}class="table-warning"{% endif %}>
+                                            <td class="fw-bold">
+                                                {% if loop.index == 1 %}
+                                                <i class="fas fa-crown text-warning me-1"></i>
+                                                {% elif loop.index == 2 %}
+                                                <i class="fas fa-medal text-secondary me-1"></i>
+                                                {% elif loop.index == 3 %}
+                                                <i class="fas fa-award text-dark me-1"></i>
+                                                {% endif %}
+                                                #{{ loop.index }}
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                                         style="width: 30px; height: 30px;">
+                                                        <small><i class="fas fa-user"></i></small>
+                                                    </div>
+                                                    <strong>{{ user.name }}</strong>
+                                                </div>
+                                            </td>
+                                            <td class="fw-bold text-warning">{{ user.xp_points }}</td>
+                                            <td>
+                                                <span class="badge bg-{{ user.get_badge_color() }} text-{% if user.get_badge_color() == 'light' %}dark{% else %}white{% endif %}">
+                                                    {{ user.get_badge_tier() }}
+                                                </span>
+                                            </td>
+                                            <td>{{ user.uploads|length }}</td>
+                                            <td>{{ user.reviews|length }}</td>
+                                            <td>
+                                                {% if user.reviews|length > 0 %}
+                                                {{ "%.1f"|format(user.accuracy_percentage or 85.0) }}%
+                                                {% else %}
+                                                N/A
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Tab -->
+        <div class="tab-pane fade" id="monthly">
+            <div class="text-center py-5">
+                <i class="fas fa-calendar-alt fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Monthly Rankings</h4>
+                <p>Track your progress this month and compete for top positions</p>
+                <p class="text-warning fw-bold">Feature coming soon!</p>
+            </div>
+        </div>
+
+        <!-- Weekly Tab -->
+        <div class="tab-pane fade" id="weekly">
+            <div class="text-center py-5">
+                <i class="fas fa-calendar-week fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Weekly Rankings</h4>
+                <p>See who's climbing fastest this week</p>
+                <p class="text-warning fw-bold">Feature coming soon!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Contest Banner -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 bg-dark text-white">
+                <div class="card-body text-center">
+                    <h4 class="fw-bold mb-3">
+                        <i class="fas fa-trophy text-warning me-2"></i>Weekly Contest Prizes
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="bg-warning text-dark rounded p-3 mb-2">
+                                <h5 class="fw-bold mb-1">Top 1%</h5>
+                                <h3 class="fw-bold">1,000,000 XP</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-light text-dark rounded p-3 mb-2">
+                                <h5 class="fw-bold mb-1">Top 5%</h5>
+                                <h3 class="fw-bold">500,000 XP</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-primary text-white rounded p-3 mb-2">
+                                <h5 class="fw-bold mb-1">Top 99%</h5>
+                                <h3 class="fw-bold">100,000 XP</h3>
+                                <small>for 100 reviews</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Filter functionality
+document.querySelectorAll('[data-filter]').forEach(button => {
+    button.addEventListener('click', function() {
+        // Update active button
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter logic would go here in a real implementation
+        const filter = this.dataset.filter;
+        console.log('Filtering by:', filter);
+    });
+});
+</script>
+{% endblock %}

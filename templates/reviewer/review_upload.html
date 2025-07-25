@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Review Upload{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-star me-2"></i>Review Upload
+                    </h4>
+                    <p class="mb-0 mt-2 text-light">Review: {{ review_count }}/5 completed</p>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Upload Details -->
+                    <div class="mb-4">
+                        <h5 class="fw-bold">{{ upload.original_filename }}</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Category:</strong> {{ upload.category.title() }}</p>
+                                <p><strong>Size:</strong> {{ "%.1f"|format(upload.file_size / 1024 / 1024) }} MB</p>
+                                <p><strong>Uploaded:</strong> {{ upload.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> 
+                                    <span class="badge bg-{% if upload.status == 'approved' %}success{% elif upload.status == 'rejected' %}danger{% else %}warning{% endif %}">
+                                        {{ upload.status.title() }}
+                                    </span>
+                                </p>
+                                <p><strong>Reviews:</strong> {{ review_count }}/5</p>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Description:</strong>
+                            <p class="text-muted mt-2">{{ upload.description }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Review Progress Bar -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">Review Progress</span>
+                            <span class="text-muted">{{ review_count }}/5 reviews completed</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar bg-dark" style="width: {{ (review_count / 5 * 100)|round }}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Existing Reviews -->
+                    {% if existing_reviews %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold mb-3">Previous Reviews ({{ existing_reviews|length }})</h6>
+                        {% for review in existing_reviews %}
+                        <div class="card border-0 bg-light mb-2">
+                            <div class="card-body py-2 px-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-{% if review.rating == 'good' %}success{% else %}danger{% endif %} me-2">
+                                            {% if review.rating == 'good' %}
+                                                <i class="fas fa-thumbs-up me-1"></i>Good
+                                            {% else %}
+                                                <i class="fas fa-thumbs-down me-1"></i>Bad
+                                            {% endif %}
+                                        </span>
+                                        <small class="text-muted">{{ review.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                                    </div>
+                                </div>
+                                {% if review.description %}
+                                <p class="mb-0 mt-2 small">{{ review.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Review Form -->
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-4">
+                            {{ form.rating.label(class="form-label fw-bold") }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        {{ form.rating(value="good", class="form-check-input") }}
+                                        <label class="form-check-label text-success fw-bold" for="{{ form.rating.id }}-0">
+                                            <i class="fas fa-thumbs-up me-1"></i>Good Content
+                                        </label>
+                                        <small class="text-muted d-block">Quality, relevant, appropriate content</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        {{ form.rating(value="bad", class="form-check-input") }}
+                                        <label class="form-check-label text-danger fw-bold" for="{{ form.rating.id }}-1">
+                                            <i class="fas fa-thumbs-down me-1"></i>Poor Content
+                                        </label>
+                                        <small class="text-muted d-block">Inappropriate, spam, or low quality</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% for error in form.rating.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.description.label(class="form-label fw-bold") }}
+                            <div class="alert alert-info py-2">
+                                <small><i class="fas fa-info-circle me-1"></i><strong>Required for negative reviews:</strong> You must provide a detailed reason (at least 10 characters) when rating content as "Bad".</small>
+                            </div>
+                            {{ form.description(class="form-control", rows="4", placeholder="Explain your rating and provide constructive feedback. For negative reviews, detailed reasoning is required.") }}
+                            {% for error in form.description.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('review_content') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Reviews
+                            </a>
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fas fa-check me-2"></i>Submit Review (+10 XP)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review Rules Card -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-3">
+                    <h6 class="fw-bold mb-2"><i class="fas fa-gavel me-2"></i>Review Rules</h6>
+                    <ul class="mb-0 small text-muted">
+                        <li>Maximum 5 reviews per upload</li>
+                        <li>3+ positive reviews = Upload approved + uploader gets bonus XP</li>
+                        <li>3+ negative reviews = Upload denied + uploader loses XP</li>
+                        <li>Negative reviews must include detailed reasoning</li>
+                        <li>You earn 10 XP for each review submitted</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
