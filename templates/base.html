@@ -18,6 +18,7 @@
     
     <!-- Premium Alpha Nex Styles -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/epic-3d-effects.css') }}" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5GQRLGZ85"></script>
 <script>
@@ -28,7 +29,10 @@
   gtag('config', 'G-F5GQRLGZ85');
 </script>
 </head>
-<body>
+<body class="cyber-grid">
+    <!-- Epic 3D Background Effects -->
+    <div class="matrix-effect" id="matrix-effect"></div>
+    <div class="floating-particles" id="particles"></div>
     <!-- Premium Navigation -->
     <nav class="navbar">
         <div class="container-premium">
@@ -42,9 +46,9 @@
                     Alpha Nex
                 </a>
                 
-                <div class="navbar-nav" style="display: flex; align-items: center; gap: var(--space-2);">
+                <div class="navbar-nav navbar-nav-horizontal">
                     <a href="{{ url_for('dashboard') }}" class="nav-link">
-                        <i class="fas fa-grid-2"></i>Dashboard
+                        <i class="fas fa-th-large"></i>Dashboard
                     </a>
                     <a href="{{ url_for('upload_file') }}" class="nav-link">
                         <i class="fas fa-upload"></i>Upload
@@ -59,16 +63,16 @@
                         <i class="fas fa-user"></i>Profile
                     </a>
                     
-                    <div style="margin-left: var(--space-6); display: flex; align-items: center; gap: var(--space-3);">
-                        <span class="badge badge-primary">
+                    <div class="navbar-user-section">
+                        <span class="badge badge-primary glitch-effect">
                             <i class="fas fa-star"></i>
                             {{ demo_user.xp_points if demo_user else 500 }} XP
                         </span>
-                        <div style="display: flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-weight: var(--weight-medium);">
-                            <div style="width: 32px; height: 32px; background: var(--gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-user" style="font-size: 14px;"></i>
+                        <div class="user-profile-display">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
                             </div>
-                            {{ demo_user.name if demo_user else 'Demo User' }}
+                            <span class="user-name holographic">{{ demo_user.name if demo_user else 'Demo User' }}</span>
                         </div>
                         
                         <!-- Strike warnings -->
@@ -103,8 +107,10 @@
     {% endwith %}
 
     <!-- Main Content -->
-    <main class="container-fluid py-4">
-        {% block content %}{% endblock %}
+    <main class="container-fluid py-4 hologram-scanner">
+        <div class="container-epic">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <!-- Epic 3D Footer -->
@@ -181,6 +187,92 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Epic 3D Effects JavaScript -->
+    <script>
+        // Matrix rain effect
+        function createMatrixRain() {
+            const matrix = document.getElementById('matrix-effect');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 50; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDelay = Math.random() * 3 + 's';
+                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                matrix.appendChild(char);
+            }
+        }
+
+        // Floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Enhanced nav link effects
+        function enhanceNavLinks() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) translateZ(5px) rotateX(5deg)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) translateZ(0) rotateX(0deg)';
+                });
+            });
+        }
+
+        // Add epic classes to cards
+        function enhanceCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.classList.add('neon-border', 'epic-hover');
+            });
+        }
+
+        // Add prismatic effect to headings
+        function enhanceTitles() {
+            const headings = document.querySelectorAll('h1, h2, h3');
+            headings.forEach(heading => {
+                heading.classList.add('glitch-text');
+                if (heading.tagName === 'H1') {
+                    heading.classList.add('prismatic-text');
+                }
+            });
+        }
+
+        // Initialize all effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrixRain();
+            createParticles();
+            enhanceNavLinks();
+            enhanceCards();
+            enhanceTitles();
+            
+            // Continuous matrix effect
+            setInterval(() => {
+                const matrixChars = document.querySelectorAll('.matrix-char');
+                matrixChars.forEach(char => {
+                    if (Math.random() < 0.1) {
+                        char.textContent = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'[Math.floor(Math.random() * 67)];
+                    }
+                });
+            }, 200);
+        });
+    </script>
     
     {% block scripts %}{% endblock %}
 </body>

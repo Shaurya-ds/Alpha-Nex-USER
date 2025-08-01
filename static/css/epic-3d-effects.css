@@ -1,0 +1,349 @@
+/* Alpha Nex - Additional Epic 3D Effects */
+/* Ultra-spectacular visual enhancements and animations */
+
+/* Matrix Rain Effect for Background */
+@keyframes matrix-rain {
+    0% { transform: translateY(-100vh); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.matrix-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.matrix-char {
+    position: absolute;
+    color: var(--neon-green);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    opacity: 0.3;
+    animation: matrix-rain 3s linear infinite;
+}
+
+/* Floating Particles */
+@keyframes float-particles {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon-blue);
+    border-radius: 50%;
+    animation: float-particles 4s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.particle:nth-child(2n) {
+    background: var(--neon-purple);
+    box-shadow: 0 0 10px var(--neon-purple);
+    animation-delay: -1s;
+}
+
+.particle:nth-child(3n) {
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+    animation-delay: -2s;
+}
+
+/* Neon Border Glow Effect */
+.neon-border {
+    position: relative;
+    overflow: hidden;
+}
+
+.neon-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--neon-blue), 
+        var(--neon-purple), 
+        var(--neon-pink), 
+        var(--neon-green));
+    border-radius: inherit;
+    z-index: -1;
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+    0% { opacity: 0.7; filter: blur(1px); }
+    100% { opacity: 1; filter: blur(0px); }
+}
+
+/* Hologram Scanner Effect */
+@keyframes scanner {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+}
+
+.hologram-scanner {
+    position: relative;
+    overflow: hidden;
+}
+
+.hologram-scanner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--neon-blue), 
+        var(--neon-blue), 
+        transparent);
+    animation: scanner 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Cyberpunk Grid Background */
+.cyber-grid {
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+}
+
+@keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* 3D Flip Card Effect */
+.flip-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+}
+
+/* Plasma Wave Effect */
+@keyframes plasma-wave {
+    0%, 100% {
+        background-position: 0% 50%;
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        background-position: 100% 50%;
+        transform: scale(1.1) rotate(90deg);
+    }
+    50% {
+        background-position: 100% 0%;
+        transform: scale(1) rotate(180deg);
+    }
+    75% {
+        background-position: 0% 0%;
+        transform: scale(0.9) rotate(270deg);
+    }
+}
+
+.plasma-wave {
+    background: linear-gradient(45deg,
+        var(--neon-blue),
+        var(--neon-purple),
+        var(--neon-pink),
+        var(--neon-green),
+        var(--neon-blue));
+    background-size: 400% 400%;
+    animation: plasma-wave 8s ease-in-out infinite;
+    filter: blur(1px);
+    opacity: 0.3;
+}
+
+/* Epic Hover Transforms */
+.epic-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.epic-hover:hover {
+    transform: 
+        translateY(-8px) 
+        rotateX(5deg) 
+        rotateY(2deg) 
+        scale(1.02);
+    box-shadow: 
+        0 25px 50px rgba(0, 212, 255, 0.3),
+        0 10px 20px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+/* Glitch Text Effect */
+@keyframes glitch-text {
+    0%, 100% {
+        text-shadow: 
+            0.05em 0 0 #00d4ff,
+            -0.05em -0.025em 0 #8b5cf6,
+            0.025em 0.05em 0 #ff0080;
+    }
+    15% {
+        text-shadow: 
+            0.05em 0 0 #8b5cf6,
+            -0.05em -0.025em 0 #ff0080,
+            0.025em 0.05em 0 #00d4ff;
+    }
+    30% {
+        text-shadow: 
+            0.05em 0 0 #ff0080,
+            -0.05em -0.025em 0 #00d4ff,
+            0.025em 0.05em 0 #8b5cf6;
+    }
+}
+
+.glitch-text:hover {
+    animation: glitch-text 0.3s ease-in-out infinite;
+}
+
+/* Neon Button Effect */
+.neon-button {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 212, 255, 0.2), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.neon-button:hover::before {
+    left: 100%;
+}
+
+.neon-button:hover {
+    color: var(--white);
+    background: var(--neon-blue);
+    box-shadow: 
+        0 0 20px var(--neon-blue),
+        0 0 40px var(--neon-blue),
+        0 0 60px var(--neon-blue);
+    text-shadow: 0 0 10px var(--white);
+}
+
+/* Loading Spinner 3D */
+@keyframes spin-3d {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+.spinner-3d {
+    width: 40px;
+    height: 40px;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--neon-blue);
+    border-right: 3px solid var(--neon-purple);
+    border-bottom: 3px solid var(--neon-pink);
+    border-left: 3px solid var(--neon-green);
+    border-radius: 50%;
+    animation: spin-3d 1s linear infinite;
+    transform-style: preserve-3d;
+}
+
+/* Prismatic Text Effect */
+.prismatic-text {
+    background: linear-gradient(45deg,
+        #ff0000, #ff8000, #ffff00, #80ff00,
+        #00ff00, #00ff80, #00ffff, #0080ff,
+        #0000ff, #8000ff, #ff00ff, #ff0080);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: prismatic 3s ease-in-out infinite;
+    font-weight: bold;
+}
+
+@keyframes prismatic {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Epic Container Effects */
+.container-epic {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.container-epic::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, 
+        var(--neon-blue), 
+        var(--neon-purple), 
+        var(--neon-pink), 
+        var(--neon-green));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+}
+
+.container-epic:hover::before {
+    opacity: 0.7;
+}
