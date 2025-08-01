@@ -19,6 +19,7 @@
     <!-- Premium Alpha Nex Styles -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/epic-3d-effects.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/minimal-black-white.css') }}" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5GQRLGZ85"></script>
 <script>
@@ -30,9 +31,7 @@
 </script>
 </head>
 <body class="cyber-grid">
-    <!-- Epic 3D Background Effects -->
-    <div class="matrix-effect" id="matrix-effect"></div>
-    <div class="floating-particles" id="particles"></div>
+
     <!-- Premium Navigation -->
     <nav class="navbar">
         <div class="container-premium">
@@ -190,36 +189,7 @@
     
     <!-- Epic 3D Effects JavaScript -->
     <script>
-        // Matrix rain effect
-        function createMatrixRain() {
-            const matrix = document.getElementById('matrix-effect');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            
-            for (let i = 0; i < 50; i++) {
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars[Math.floor(Math.random() * chars.length)];
-                char.style.left = Math.random() * 100 + '%';
-                char.style.animationDelay = Math.random() * 3 + 's';
-                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                matrix.appendChild(char);
-            }
-        }
 
-        // Floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 4 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                container.appendChild(particle);
-            }
-        }
 
         // Enhanced nav link effects
         function enhanceNavLinks() {
@@ -256,21 +226,11 @@
 
         // Initialize all effects
         document.addEventListener('DOMContentLoaded', function() {
-            createMatrixRain();
-            createParticles();
             enhanceNavLinks();
             enhanceCards();
             enhanceTitles();
             
-            // Continuous matrix effect
-            setInterval(() => {
-                const matrixChars = document.querySelectorAll('.matrix-char');
-                matrixChars.forEach(char => {
-                    if (Math.random() < 0.1) {
-                        char.textContent = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'[Math.floor(Math.random() * 67)];
-                    }
-                });
-            }, 200);
+
         });
     </script>
     

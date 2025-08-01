@@ -20,16 +20,9 @@ body {
     line-height: 1.6;
 }
 
-/* Remove all animations and effects */
+/* Keep animations and effects, just override colors */
 *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    filter: none !important;
-    backdrop-filter: none !important;
-    background-image: none !important;
+    /* Keep all animations and effects intact */
 }
 
 /* Navigation */
@@ -145,10 +138,10 @@ a:hover {
     color: var(--black) !important;
 }
 
-/* Remove all special effects */
+/* Keep all special effects but ensure they use black and white colors */
 .matrix-effect, .floating-particles, .neon-border, .hologram-scanner, 
 .glitch-text, .prismatic-text, .epic-hover, .holographic, .cyber-grid {
-    display: none !important;
+    /* Keep all effects visible and working */
 }
 
 /* Badge */
@@ -158,10 +151,10 @@ a:hover {
     border: 1px solid var(--white);
 }
 
-/* Remove all background patterns and effects */
+/* Keep all background patterns and effects but ensure black/white colors */
 body::before, body::after, 
 .container::before, .container::after,
 .card::before, .card::after,
 *::before, *::after {
-    display: none !important;
+    /* Keep all effects visible */
 }
