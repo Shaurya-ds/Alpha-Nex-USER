@@ -1,0 +1,167 @@
+/* Alpha Nex - Pure Black & White Minimal Theme */
+/* Absolutely no colors, effects, or animations - pure simplicity */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Only two colors allowed */
+    --black: #000000;
+    --white: #ffffff;
+}
+
+body {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Remove all animations and effects */
+*, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    background-image: none !important;
+}
+
+/* Navigation */
+.navbar {
+    background: var(--black) !important;
+    border-bottom: 1px solid var(--white);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: var(--white) !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: var(--white) !important;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+    background: var(--white);
+    color: var(--black) !important;
+}
+
+/* Content */
+.container, .container-fluid, .container-premium, .container-epic {
+    background: var(--black) !important;
+    color: var(--white) !important;
+}
+
+/* Cards */
+.card {
+    background: var(--black) !important;
+    border: 1px solid var(--white);
+    color: var(--white) !important;
+}
+
+.card-header, .card-body, .card-footer {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border-color: var(--white) !important;
+}
+
+/* Buttons */
+.btn, button, input[type="submit"] {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+    padding: 0.5rem 1rem;
+}
+
+.btn:hover, button:hover, input[type="submit"]:hover {
+    background: var(--white) !important;
+    color: var(--black) !important;
+}
+
+/* Forms */
+.form-control, input, textarea, select {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+}
+
+.form-control:focus, input:focus, textarea:focus, select:focus {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--white) !important;
+    outline: none;
+}
+
+/* Tables */
+.table, table {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white);
+}
+
+.table th, .table td, table th, table td {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white);
+}
+
+/* Alerts */
+.alert {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+}
+
+/* Footer */
+footer {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border-top: 1px solid var(--white);
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6, p, span, div, a, label {
+    color: var(--white) !important;
+}
+
+a {
+    color: var(--white) !important;
+}
+
+a:hover {
+    background: var(--white);
+    color: var(--black) !important;
+}
+
+/* Remove all special effects */
+.matrix-effect, .floating-particles, .neon-border, .hologram-scanner, 
+.glitch-text, .prismatic-text, .epic-hover, .holographic, .cyber-grid {
+    display: none !important;
+}
+
+/* Badge */
+.badge {
+    background: var(--white) !important;
+    color: var(--black) !important;
+    border: 1px solid var(--white);
+}
+
+/* Remove all background patterns and effects */
+body::before, body::after, 
+.container::before, .container::after,
+.card::before, .card::after,
+*::before, *::after {
+    display: none !important;
+}
