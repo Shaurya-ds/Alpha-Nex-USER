@@ -17,15 +17,15 @@
     --white: #ffffff;
     --gray-50: #f8f9fa;
     
-    /* Neon Accent Colors for 3D Effects */
-    --neon-blue: #00d4ff;
-    --neon-purple: #8b5cf6;
-    --neon-green: #00ff88;
-    --neon-pink: #ff0080;
-    --neon-yellow: #ffeb3b;
+    /* Pure Black & White - No Colors */
+    --neon-blue: #ffffff;
+    --neon-purple: #ffffff;
+    --neon-green: #ffffff;
+    --neon-pink: #ffffff;
+    --neon-yellow: #ffffff;
     
-    /* Semantic Colors - Dark Theme */
-    --primary: var(--neon-blue);
+    /* Semantic Colors - Black & White Only */
+    --primary: var(--white);
     --secondary: var(--dark-400);
     --background: var(--black);
     --surface: var(--dark-800);
