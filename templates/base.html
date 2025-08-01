@@ -107,20 +107,71 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-light border-top mt-5 py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h6 class="fw-bold text-black">Alpha Nex</h6>
-                    <p class="text-muted mb-0">Earn XP points that can be converted to money once our web app goes live.</p>
+    <!-- Epic 3D Footer -->
+    <footer style="
+        background: linear-gradient(135deg, var(--dark-900) 0%, var(--black) 100%);
+        border-top: 1px solid var(--border);
+        margin-top: 5rem;
+        padding: 3rem 0;
+        position: relative;
+        overflow: hidden;
+    ">
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+        "></div>
+        <div class="container-premium">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 2rem;">
+                <div>
+                    <h6 style="
+                        font-weight: var(--weight-extrabold);
+                        color: var(--white);
+                        font-size: 1.25rem;
+                        margin-bottom: 1rem;
+                        text-shadow: 0 0 10px var(--neon-blue);
+                    " class="holographic">Alpha Nex</h6>
+                    <p style="
+                        color: var(--text-secondary);
+                        margin: 0;
+                        max-width: 400px;
+                        line-height: 1.6;
+                    ">Earn XP points that can be converted to money once our web app goes live. Experience the future of content creation with epic 3D design.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="d-flex justify-content-md-end gap-4">
-                        <a href="#" class="text-decoration-none text-muted">Terms</a>
-                        <a href="#" class="text-decoration-none text-muted">Privacy</a>
-                        <a href="#" class="text-decoration-none text-muted">Support</a>
-                    </div>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-blue)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Terms</a>
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-purple)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Privacy</a>
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-green)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Support</a>
                 </div>
             </div>
         </div>
