@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Alpha Nex - Content Platform{% endblock %}</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Custom Alpha Nex Styles -->
+    <!-- Bootstrap CSS (minimal use) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Premium Alpha Nex Styles -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5GQRLGZ85"></script>
@@ -25,68 +29,58 @@
 </script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-black" href="{{ url_for('index') }}">
-                <i class="fas fa-cube me-2"></i>Alpha Nex
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('upload_file') }}">
-                            <i class="fas fa-cloud-upload-alt me-1"></i>Upload
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('review_content') }}">
-                            <i class="fas fa-star me-1"></i>Review
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('leaderboard') }}">
-                            <i class="fas fa-trophy me-1"></i>Leaderboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile') }}">
-                            <i class="fas fa-user me-1"></i>Profile
-                        </a>
-                    </li>
-                </ul>
+    <!-- Premium Navigation -->
+    <nav class="navbar">
+        <div class="container-premium">
+            <div class="flex-between" style="width: 100%;">
+                <a href="{{ url_for('index') }}" class="navbar-brand">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    Alpha Nex
+                </a>
                 
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-                            <span class="badge bg-dark me-2">{{ demo_user.xp_points if demo_user else 500 }} XP</span>
-                            <i class="fas fa-user-circle me-1"></i>{{ demo_user.name if demo_user else 'Demo User' }}
-                            
-                            <!-- Strike warnings -->
-                            {% if demo_user and (demo_user.uploader_strikes > 0 or demo_user.reviewer_strikes > 0) %}
-                            <span class="badge bg-warning text-dark ms-2">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                {% if demo_user.uploader_strikes > 0 %}U:{{ demo_user.uploader_strikes }}{% endif %}
-                                {% if demo_user.reviewer_strikes > 0 %}R:{{ demo_user.reviewer_strikes }}{% endif %}
-                            </span>
-                            {% endif %}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">
-                                <i class="fas fa-user me-2"></i>Profile
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="navbar-nav" style="display: flex; align-items: center; gap: var(--space-2);">
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">
+                        <i class="fas fa-grid-2"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('upload_file') }}" class="nav-link">
+                        <i class="fas fa-upload"></i>Upload
+                    </a>
+                    <a href="{{ url_for('review_content') }}" class="nav-link">
+                        <i class="fas fa-star"></i>Review
+                    </a>
+                    <a href="{{ url_for('leaderboard') }}" class="nav-link">
+                        <i class="fas fa-trophy"></i>Leaderboard
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="nav-link">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    
+                    <div style="margin-left: var(--space-6); display: flex; align-items: center; gap: var(--space-3);">
+                        <span class="badge badge-primary">
+                            <i class="fas fa-star"></i>
+                            {{ demo_user.xp_points if demo_user else 500 }} XP
+                        </span>
+                        <div style="display: flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-weight: var(--weight-medium);">
+                            <div style="width: 32px; height: 32px; background: var(--gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 14px;"></i>
+                            </div>
+                            {{ demo_user.name if demo_user else 'Demo User' }}
+                        </div>
+                        
+                        <!-- Strike warnings -->
+                        {% if demo_user and (demo_user.uploader_strikes > 0 or demo_user.reviewer_strikes > 0) %}
+                        <span class="badge badge-secondary">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            {% if demo_user.uploader_strikes > 0 %}U:{{ demo_user.uploader_strikes }}{% endif %}
+                            {% if demo_user.reviewer_strikes > 0 %}R:{{ demo_user.reviewer_strikes }}{% endif %}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
