@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block title %}Alpha Nex - Content Platform with AI Integration{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-black text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-bolt me-3"></i>Alpha Nex
+                </h1>
+                <p class="display-6 fw-bold mb-4 text-warning">
+                    Convert your effort into XP. Your XP into Cash.
+                </p>
+                <p class="lead mb-4">
+                    Real user platform with gamified judgment, quality data review, and cash rewards. Join the next generation of crowdsourced AI data validation.
+                </p>
+                <div class="bg-dark bg-opacity-25 p-4 rounded mb-4">
+                    <h5 class="fw-bold mb-2">💰 Earn More XP = Earn More Cash</h5>
+                    <p class="mb-0">Upload content • Review others • Spot fakes • Climb leaderboards • Get paid</p>
+                </div>
+                
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-lg px-4">
+                        <i class="fas fa-rocket me-2"></i>Join Now
+                    </a>
+                    <a href="#features" class="btn btn-outline-light btn-lg px-4">
+                        <i class="fas fa-search me-2"></i>Explore
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-cube display-1 text-white-50"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Leaderboard Preview Section -->
+<div class="container py-5" id="features">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-black mb-3">🏆 Top Performers</h2>
+        <p class="text-muted">Join the elite ranks of Alpha Nex champions</p>
+    </div>
+    
+    <!-- Quick Leaderboard Preview -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg bg-black text-white">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold text-warning mb-2">Live Leaderboard</h4>
+                        <p class="text-light">XP = Power • Reviews = Trust • Badges = Identity</p>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="bg-warning text-dark rounded p-3">
+                                <i class="fas fa-crown fa-2x mb-2"></i>
+                                <h6 class="fw-bold">Demo User</h6>
+                                <small>500 XP</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="bg-light text-dark rounded p-3">
+                                <i class="fas fa-medal fa-2x mb-2"></i>
+                                <h6 class="fw-bold">Test User</h6>
+                                <small>300 XP</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="bg-dark border border-light text-white rounded p-3">
+                                <i class="fas fa-award fa-2x mb-2"></i>
+                                <h6 class="fw-bold">Join Now</h6>
+                                <small>Start Here</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('leaderboard') }}" class="btn btn-warning">
+                            <i class="fas fa-trophy me-2"></i>View Full Leaderboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Platform Features Section -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-black mb-3">How to Earn XP & Cash</h2>
+        <p class="text-muted">Multiple ways to convert your effort into money</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Upload System -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-cloud-upload-alt fa-lg"></i>
+                    </div>
+                    <h5 class="fw-bold text-black">Upload & Earn</h5>
+                    <p class="text-muted small">
+                        Upload quality content (videos, audio, documents, code) and earn XP. 
+                        AI-powered duplicate detection ensures fair rewards.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Review System -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-star fa-lg"></i>
+                    </div>
+                    <h5 class="fw-bold text-black">Review & Judge</h5>
+                    <p class="text-muted small">
+                        Review others' content, spot fakes, provide quality feedback. 
+                        Accuracy bonuses and fast review multipliers available.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Strike System -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-shield-alt fa-lg"></i>
+                    </div>
+                    <h5 class="fw-bold text-black">Climb Rankings</h5>
+                    <p class="text-muted small">
+                        Compete in weekly contests, earn special badges, 
+                        and climb the leaderboard for bigger rewards.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rewards -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-coins fa-lg"></i>
+                    </div>
+                    <h5 class="fw-bold text-black">Cash Out</h5>
+                    <p class="text-muted small">
+                        Convert XP to real money. Weekly contests reward 
+                        top performers with huge XP prizes. Your judgment has value.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Weekly Contest Section -->
+<div class="bg-warning py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-black mb-3">Weekly Contests</h2>
+            <p class="text-dark">10 days upload • 20 days review • Win big XP rewards</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-3">
+                        <div class="bg-dark text-white rounded p-4">
+                            <h3 class="fw-bold text-warning">1,000,000 XP</h3>
+                            <h5 class="fw-bold">Top 1%</h5>
+                            <p class="mb-0">Elite performers</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="bg-black text-white rounded p-4">
+                            <h3 class="fw-bold text-warning">500,000 XP</h3>
+                            <h5 class="fw-bold">Top 5%</h5>
+                            <p class="mb-0">Expert reviewers</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="bg-dark text-white rounded p-4">
+                            <h3 class="fw-bold text-warning">100,000 XP</h3>
+                            <h5 class="fw-bold">Top 99%</h5>
+                            <p class="mb-0">100 reviews minimum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-black mb-3">Frequently Asked Questions</h2>
+            <p class="text-muted">Simple process to start earning XP points</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How does the XP system work?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You earn XP for uploading quality content, reviewing others' submissions, spotting fake content, and participating in contests. Higher accuracy and faster reviews earn bonus XP. XP points can be converted to real money when the platform goes live.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What can I upload and review?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Upload videos, audio files, documents, code, images, and text. All content goes through AI-powered duplicate detection and peer review. You can review content from other users to maintain quality standards and earn XP.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                How do weekly contests work?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Each contest has two phases: 10 days for unrestricted uploads, then 20 days for intensive review. Top 1% earns 1,000,000 XP, top 5% earns 500,000 XP, and anyone in top 99% with 100+ reviews earns 100,000 XP.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What are badges and rankings?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Badges show your skill level: Top 1% (Fire), Top 5% (Gold), Top 10% (Silver), Top 25% (Bronze), Top 50% (Blue). Your position on the leaderboard determines your badge and earning potential.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                How do I get paid?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Currently, you earn XP points which will convert to real money when the platform goes live. Contest winners get XP prizes now, cash payments later. XP withdrawals will require minimum amounts and admin approval once live.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-black text-white py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Ready to Start Earning?</h2>
+        <p class="lead mb-4">Join Alpha Nex today and convert your effort into XP, then XP into cash</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-lg px-5">
+                <i class="fas fa-rocket me-2"></i>Start Now
+            </a>
+            <a href="{{ url_for('leaderboard') }}" class="btn btn-outline-light btn-lg px-5">
+                <i class="fas fa-trophy me-2"></i>View Rankings
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

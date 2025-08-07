@@ -3,186 +3,77 @@
 {% block title %}Dashboard - Alpha Nex{% endblock %}
 
 {% block content %}
-<div class="container-premium section-spacing">
-    <!-- Hero Section -->
-    <div style="margin-bottom: var(--space-16);">
-        <div class="flex-between" style="margin-bottom: var(--space-8);">
-            <div>
-                <h1 style="margin-bottom: var(--space-2);">Welcome back, {{ demo_user.name if demo_user else 'Demo User' }}</h1>
-                <p class="text-secondary" style="font-size: 1.125rem; margin: 0;">Ready to upload content and earn XP points</p>
-            </div>
-            <div style="text-align: right;">
-                <div class="stats-number">{{ demo_user.xp_points if demo_user else 500 }}</div>
-                <div class="stats-label">XP Points</div>
-                <div style="margin-top: var(--space-3);">
-                    <span class="badge badge-success">
-                        {% if demo_user and demo_user.get_badge_tier() == 'Top 1%' %}
-                        <i class="fas fa-fire"></i> Top 1%
-                        {% elif demo_user and demo_user.get_badge_tier() == 'Top 5%' %}
-                        <i class="fas fa-star"></i> Top 5%
-                        {% elif demo_user and demo_user.get_badge_tier() == 'Top 10%' %}
-                        <i class="fas fa-certificate"></i> Top 10%
-                        {% elif demo_user and demo_user.get_badge_tier() == 'Top 25%' %}
-                        <i class="fas fa-medal"></i> Top 25%
-                        {% else %}
-                        <i class="fas fa-award"></i> New User
-                        {% endif %}
-                    </span>
-                </div>
-            </div>
-        </div>
+<div style="margin-bottom: 2rem;">
+    <h1>Welcome, {{ demo_user.name if demo_user else 'Demo User' }}</h1>
+    <p>Your XP: {{ demo_user.xp_points if demo_user else 500 }} points</p>
+</div>
 
-        <!-- Strike Warnings -->
-        {% if demo_user and (demo_user.uploader_strikes > 0 or demo_user.reviewer_strikes > 0) %}
-        <div class="alert alert-warning" style="margin-bottom: var(--space-8);">
-            <div class="flex-between">
-                <div style="display: flex; align-items: center; gap: var(--space-4);">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 1.25rem;"></i>
-                    <div>
-                        <div style="font-weight: var(--weight-semibold); margin-bottom: var(--space-1);">Strike Warning</div>
-                        <div style="display: flex; gap: var(--space-6);">
-                            {% if demo_user.uploader_strikes > 0 %}
-                            <span>Uploader: {{ demo_user.uploader_strikes }}/3 strikes</span>
-                            {% endif %}
-                            {% if demo_user.reviewer_strikes > 0 %}
-                            <span>Reviewer: {{ demo_user.reviewer_strikes }}/3 strikes</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ url_for('profile') }}" class="btn btn-secondary btn-sm">View Details</a>
-            </div>
-        </div>
-        {% endif %}
+<!-- Strike Warnings -->
+{% if demo_user and (demo_user.uploader_strikes > 0 or demo_user.reviewer_strikes > 0) %}
+<div class="alert alert-warning">
+    <strong>Strike Warning:</strong>
+    {% if demo_user.uploader_strikes > 0 %}
+    Uploader: {{ demo_user.uploader_strikes }}/3 strikes
+    {% endif %}
+    {% if demo_user.reviewer_strikes > 0 %}
+    Reviewer: {{ demo_user.reviewer_strikes }}/3 strikes
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+    <div class="card">
+        <div class="card-header">Total Uploads</div>
+        <div class="card-body">{{ upload_count }}</div>
     </div>
-
-    <!-- Quick Stats Grid -->
-    <div class="grid-3" style="margin-bottom: var(--space-16);">
-        <div class="stats-card">
-            <div class="stats-number">{{ upload_count }}</div>
-            <div class="stats-label">Total Uploads</div>
-        </div>
-        <div class="stats-card">
-            <div class="stats-number">{{ review_count }}</div>
-            <div class="stats-label">Reviews Completed</div>
-        </div>
-        <div class="stats-card">
-            <div class="stats-number">{{ pending_reviews }}</div>
-            <div class="stats-label">Pending Reviews</div>
-        </div>
+    <div class="card">
+        <div class="card-header">Reviews Completed</div>
+        <div class="card-body">{{ review_count }}</div>
     </div>
-
-    <!-- Quick Actions -->
-    <div style="margin-bottom: var(--space-16);">
-        <h2 style="margin-bottom: var(--space-6);">Quick Actions</h2>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-body">
-                    <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
-                        <div style="width: 48px; height: 48px; background: var(--black); border-radius: var(--radius); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-upload" style="color: white; font-size: 20px;"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin: 0;">Upload Content</h4>
-                            <p style="margin: 0; color: var(--text-secondary);">Share your files and earn XP points</p>
-                        </div>
-                    </div>
-                    <a href="{{ url_for('upload_file') }}" class="btn btn-primary" style="width: 100%;">
-                        Start Upload
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
-                        <div style="width: 48px; height: 48px; background: var(--gray-100); border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-star" style="color: var(--text-primary); font-size: 20px;"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin: 0;">Review Content</h4>
-                            <p style="margin: 0; color: var(--text-secondary);">Rate submissions and earn rewards</p>
-                        </div>
-                    </div>
-                    <a href="{{ url_for('review_content') }}" class="btn btn-secondary" style="width: 100%;">
-                        Start Review
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+        <div class="card-header">Pending Reviews</div>
+        <div class="card-body">{{ pending_reviews }}</div>
     </div>
+</div>
 
-    <!-- Recent Activity -->
-    <div>
-        <div class="flex-between" style="margin-bottom: var(--space-6);">
-            <h2>Recent Activity</h2>
-            <a href="{{ url_for('profile') }}" class="btn btn-ghost">View All</a>
-        </div>
-
-        {% if recent_uploads %}
-        <div class="card">
-            <div class="card-header">
-                <h5 style="margin: 0; font-weight: var(--weight-semibold);">Latest Uploads</h5>
-            </div>
-            <div class="card-body" style="padding: 0;">
-                <table class="table" style="margin: 0;">
-                    <thead>
-                        <tr>
-                            <th style="padding-left: var(--space-6);">File</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>XP Earned</th>
-                            <th style="padding-right: var(--space-6);">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for upload in recent_uploads[:5] %}
-                        <tr>
-                            <td style="padding-left: var(--space-6);">
-                                <div style="display: flex; align-items: center; gap: var(--space-3);">
-                                    <div style="width: 32px; height: 32px; background: var(--gray-100); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-{{ 'file-video' if upload.category == 'video' else 'file-audio' if upload.category == 'audio' else 'file-image' if upload.category == 'image' else 'file-code' if upload.category == 'code' else 'file-alt' }}"></i>
-                                    </div>
-                                    <div>
-                                        <div style="font-weight: var(--weight-medium);">{{ upload.original_filename[:30] }}{% if upload.original_filename|length > 30 %}...{% endif %}</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-muted);">{{ (upload.file_size / 1024 / 1024)|round(1) }} MB</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge badge-secondary">{{ upload.category.title() }}</span>
-                            </td>
-                            <td>
-                                <span class="badge {% if upload.status == 'approved' %}badge-success{% elif upload.status == 'rejected' %}badge-danger{% else %}badge-secondary{% endif %}">
-                                    {{ upload.status.title() }}
-                                </span>
-                            </td>
-                            <td>
-                                <span style="font-weight: var(--weight-medium);">+{{ upload.xp_reward or 0 }} XP</span>
-                            </td>
-                            <td style="padding-right: var(--space-6);">
-                                {{ upload.upload_date.strftime('%m/%d/%Y') }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {% else %}
-        <div class="card">
-            <div class="card-body" style="text-align: center; padding: var(--space-12);">
-                <div style="width: 64px; height: 64px; background: var(--gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4) auto;">
-                    <i class="fas fa-upload" style="font-size: 24px; color: var(--text-muted);"></i>
-                </div>
-                <h4 style="margin-bottom: var(--space-2);">No uploads yet</h4>
-                <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">Start uploading content to see your activity here</p>
-                <a href="{{ url_for('upload_file') }}" class="btn btn-primary">Upload Your First File</a>
-            </div>
-        </div>
-        {% endif %}
+<!-- Quick Actions -->
+<div style="margin: 2rem 0;">
+    <h2>Quick Actions</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="{{ url_for('upload_file') }}" class="btn btn-primary">Upload File</a>
+        <a href="{{ url_for('review_content') }}" class="btn">Review Content</a>
+        <a href="{{ url_for('leaderboard') }}" class="btn">View Leaderboard</a>
+        <a href="{{ url_for('profile') }}" class="btn">My Profile</a>
     </div>
+</div>
+
+<!-- Recent Activity -->
+<div style="margin: 2rem 0;">
+    <h2>Recent Uploads</h2>
+    {% if recent_uploads %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Category</th>
+                <th>Upload Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for upload in recent_uploads %}
+            <tr>
+                <td>{{ upload.filename }}</td>
+                <td>{{ upload.category }}</td>
+                <td>{{ upload.upload_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ upload.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No uploads yet. <a href="{{ url_for('upload_file') }}">Upload your first file</a></p>
+    {% endif %}
 </div>
 {% endblock %}

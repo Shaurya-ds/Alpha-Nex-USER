@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Alpha Nex - Content Platform{% endblock %}</title>
+    
+    <!-- Google Fonts - Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS (minimal use) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Premium Alpha Nex Styles -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/epic-3d-effects.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/minimal-black-white.css') }}" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5GQRLGZ85"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5GQRLGZ85');
+</script>
+</head>
+<body class="cyber-grid">
+
+    <!-- Premium Navigation -->
+    <nav class="navbar">
+        <div class="container-premium">
+            <div class="flex-between" style="width: 100%;">
+                <a href="{{ url_for('index') }}" class="navbar-brand">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    Alpha Nex
+                </a>
+                
+                <div class="navbar-nav navbar-nav-horizontal">
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">
+                        <i class="fas fa-th-large"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('upload_file') }}" class="nav-link">
+                        <i class="fas fa-upload"></i>Upload
+                    </a>
+                    <a href="{{ url_for('review_content') }}" class="nav-link">
+                        <i class="fas fa-star"></i>Review
+                    </a>
+                    <a href="{{ url_for('leaderboard') }}" class="nav-link">
+                        <i class="fas fa-trophy"></i>Leaderboard
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="nav-link">
+                        <i class="fas fa-user"></i>Profile
+                    </a>
+                    
+                    <div class="navbar-user-section">
+                        <span class="badge badge-primary glitch-effect">
+                            <i class="fas fa-star"></i>
+                            {{ demo_user.xp_points if demo_user else 500 }} XP
+                        </span>
+                        <div class="user-profile-display">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="user-name holographic">{{ demo_user.name if demo_user else 'Demo User' }}</span>
+                        </div>
+                        
+                        <!-- Strike warnings -->
+                        {% if demo_user and (demo_user.uploader_strikes > 0 or demo_user.reviewer_strikes > 0) %}
+                        <span class="badge badge-secondary">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            {% if demo_user.uploader_strikes > 0 %}U:{{ demo_user.uploader_strikes }}{% endif %}
+                            {% if demo_user.reviewer_strikes > 0 %}R:{{ demo_user.reviewer_strikes }}{% endif %}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="container-fluid mt-3">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else 'warning' if category == 'warning' else 'success' if category == 'success' else 'info' }} alert-dismissible fade show">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-{{ 'exclamation-circle' if category == 'error' else 'exclamation-triangle' if category == 'warning' else 'check-circle' if category == 'success' else 'info-circle' }} me-2"></i>
+                    {{ message }}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="container-fluid py-4 hologram-scanner">
+        <div class="container-epic">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Epic 3D Footer -->
+    <footer style="
+        background: linear-gradient(135deg, var(--dark-900) 0%, var(--black) 100%);
+        border-top: 1px solid var(--border);
+        margin-top: 5rem;
+        padding: 3rem 0;
+        position: relative;
+        overflow: hidden;
+    ">
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+        "></div>
+        <div class="container-premium">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 2rem;">
+                <div>
+                    <h6 style="
+                        font-weight: var(--weight-extrabold);
+                        color: var(--white);
+                        font-size: 1.25rem;
+                        margin-bottom: 1rem;
+                        text-shadow: 0 0 10px var(--neon-blue);
+                    " class="holographic">Alpha Nex</h6>
+                    <p style="
+                        color: var(--text-secondary);
+                        margin: 0;
+                        max-width: 400px;
+                        line-height: 1.6;
+                    ">Earn XP points that can be converted to money once our web app goes live. Experience the future of content creation with epic 3D design.</p>
+                </div>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-blue)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Terms</a>
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-purple)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Privacy</a>
+                    <a href="#" style="
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-weight: var(--weight-medium);
+                        padding: 0.5rem 1rem;
+                        border-radius: var(--radius);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        transform-style: preserve-3d;
+                    " onmouseover="this.style.color='var(--white)'; this.style.transform='translateY(-2px)'; this.style.textShadow='0 0 10px var(--neon-green)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.transform='translateY(0)'; this.style.textShadow='none'">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Epic 3D Effects JavaScript -->
+    <script>
+
+
+        // Enhanced nav link effects
+        function enhanceNavLinks() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) translateZ(5px) rotateX(5deg)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) translateZ(0) rotateX(0deg)';
+                });
+            });
+        }
+
+        // Add epic classes to cards
+        function enhanceCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.classList.add('neon-border', 'epic-hover');
+            });
+        }
+
+        // Add prismatic effect to headings
+        function enhanceTitles() {
+            const headings = document.querySelectorAll('h1, h2, h3');
+            headings.forEach(heading => {
+                heading.classList.add('glitch-text');
+                if (heading.tagName === 'H1') {
+                    heading.classList.add('prismatic-text');
+                }
+            });
+        }
+
+        // Initialize all effects
+        document.addEventListener('DOMContentLoaded', function() {
+            enhanceNavLinks();
+            enhanceCards();
+            enhanceTitles();
+            
+
+        });
+    </script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>
